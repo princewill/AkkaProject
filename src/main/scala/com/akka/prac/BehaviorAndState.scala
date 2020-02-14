@@ -9,6 +9,10 @@ object BehaviorAndState extends App {
   // creating an actor inside the actor system
   val actor = actorSystem.actorOf(Props(classOf[SummingActor], 10), "summingactor")
 
+  while (true) {
+    Thread.sleep(3000)
+    actor ! 1
+  }
   // print actor path
   println(actor.path)
 }
