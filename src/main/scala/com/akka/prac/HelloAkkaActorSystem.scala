@@ -4,6 +4,6 @@ import akka.actor.ActorSystem
 
 
 object HelloAkkaActorSystem extends App {
-  val actorSystem = ActorSystem("HelloAkka")
+  val actorSystem = ActorSystem("HelloAkkaActorSystem")
   println(actorSystem)
 }
