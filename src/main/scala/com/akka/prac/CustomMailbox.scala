@@ -2,14 +2,18 @@ package com.akka.prac
 
 import java.util.concurrent.ConcurrentLinkedQueue
 
-import akka.actor.{ActorRef, ActorSystem}
+import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import akka.dispatch.{Envelope, MailboxType, MessageQueue, ProducesMessageQueue}
 import com.typesafe.config.Config
 
 object CustomMailbox {
-
+  val actorSystem = ActorSystem("CustomMailbox")
+  val actor: ActorRef = actorSystem.actorOf(Props[MySpecialActor].withDispatcher("custom-dispatcher"))
+  val actor1: ActorRef = actorSystem.actorOf(Props[MyActor],name = "xyz")
+  val actor2: ActorRef = actorSystem.actorOf(Props[MyActor],name = "MyActor")
+  actor1 !  ("hello", actor)
+  actor2 !  ("hello", actor)
 }
-
 
 class MyMessageQueue extends MessageQueue {
 
@@ -43,4 +47,19 @@ class MyUnboundedMailbox extends MailboxType with ProducesMessageQueue[MyMessage
 
   // The create method is called to create the MessageQueue
   final override def create(owner: Option[ActorRef], system: Option[ActorSystem]): MessageQueue = new MyMessageQueue()
+}
+
+class MySpecialActor extends Actor {
+
+  override def receive: Receive = {
+    case msg: String => println(s"$msg")
+  }
+}
+
+class MyActor extends Actor {
+
+  override def receive: Receive = {
+    case (msg: String, actorRef: ActorRef) => actorRef ! msg
+    case msg: String => println(s"$msg")
+  }
 }

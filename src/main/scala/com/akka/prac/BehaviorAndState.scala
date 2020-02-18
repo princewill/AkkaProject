@@ -4,7 +4,7 @@ import akka.actor.{Actor, ActorSystem, Props}
 
 
 object BehaviorAndState extends App {
-  val actorSystem = ActorSystem("HelloAkka")
+  val actorSystem = ActorSystem("BehaviorAndState")
 
   // creating an actor inside the actor system
   val actor = actorSystem.actorOf(Props(classOf[SummingActor], 10), "summingactor")
