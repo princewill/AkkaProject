@@ -8,7 +8,7 @@ import com.typesafe.config.Config
 
 object CustomMailbox {
   val actorSystem = ActorSystem("CustomMailbox")
-  val actor: ActorRef = actorSystem.actorOf(Props[MySpecialActor].withDispatcher("custom-dispatcher"))
+  val actor: ActorRef = actorSystem.actorOf(Props[MySpecialActor].withDispatcher("custom-dispatcher"), "specialActor")
   val actor1: ActorRef = actorSystem.actorOf(Props[MyActor],name = "xyz")
   val actor2: ActorRef = actorSystem.actorOf(Props[MyActor],name = "MyActor")
   actor1 !  ("hello", actor)
