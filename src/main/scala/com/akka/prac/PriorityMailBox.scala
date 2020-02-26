@@ -5,7 +5,7 @@ import akka.actor.ActorSystem.Settings
 import akka.dispatch.{PriorityGenerator, UnboundedPriorityMailbox}
 import com.typesafe.config.Config
 
-object PriorityMailBox extends App{
+object PriorityMailBox extends App {
 
   val actorSystem = ActorSystem("PriorityMailBox")
   val myPriorityActor = actorSystem.actorOf(Props[MyPriorityActor].withDispatcher("prio-dispatcher"))
@@ -21,20 +21,7 @@ object PriorityMailBox extends App{
 
 }
 
-
-
-class MyPriorityActor extends Actor {
-
-  override def receive: Receive = {
-    case x: Int => println(x)
-    case x: String => println(x)
-    case x: Long => println(x)
-    case x => println(x)
-  }
-
-}
-
-class MyPriorityActorMailBox(settings: Settings, config: Config) extends UnboundedPriorityMailbox(
+class MyPriorityActorMailBox(settings: Settings, config: Config) extends UnboundedPriorityMailbox (
   // Create a new PriorityGenerator,lower prio means more important
 
   PriorityGenerator {
@@ -49,3 +36,15 @@ class MyPriorityActorMailBox(settings: Settings, config: Config) extends Unbound
   }
 
 )
+
+class MyPriorityActor extends Actor {
+
+  override def receive: Receive = {
+    case x: Int => println(x)
+    case x: String => println(x)
+    case x: Long => println(x)
+    case x => println(x)
+  }
+
+}
+
