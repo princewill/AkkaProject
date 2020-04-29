@@ -7,7 +7,7 @@ import akka.util.Timeout
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
-class FibunacciActor extends Actor {
+class FibonacciActor extends Actor {
 
   override def receive: Receive = {
     case num: Int => sender ! computeFib(num)
@@ -20,12 +20,12 @@ class FibunacciActor extends Actor {
 }
 
 
-object FibunacciActor extends App {
+object FibonacciActor extends App {
   implicit val timeout: Timeout = Timeout(10.seconds)
 
-  val actorSystem = ActorSystem("FibunacciActor")
+  val actorSystem = ActorSystem("FibonacciActor")
 
-  val actor = actorSystem.actorOf(Props[FibunacciActor])
+  val actor = actorSystem.actorOf(Props[FibonacciActor])
 
   val resultF = (actor ? 10).mapTo[Int]
 
