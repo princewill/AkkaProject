@@ -18,7 +18,7 @@ object BehaviorAndState extends App {
 }
 
 
-class SummingActor(initalSum: Int) extends Actor {
+class SummingActor(initialSum: Int) extends Actor {
   // state inside the actor
   var sum = 0
 
@@ -26,7 +26,7 @@ class SummingActor(initalSum: Int) extends Actor {
   override def receive: Receive = {
     // receives message an integer
     case x: Int =>
-      sum = initalSum + sum + x
+      sum = initialSum + sum + x
       println(s"my state as sum is $sum")
 
     // receives default message

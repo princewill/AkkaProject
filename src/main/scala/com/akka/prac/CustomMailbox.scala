@@ -6,8 +6,8 @@ import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import akka.dispatch.{Envelope, MailboxType, MessageQueue, ProducesMessageQueue}
 import com.typesafe.config.Config
 
-object CustomMailbox {
-  val actorSystem = ActorSystem("CustomMailbox")
+object CustomMailbox extends App {
+  val actorSystem: ActorSystem = ActorSystem("CustomMailbox")
   val actor: ActorRef = actorSystem.actorOf(Props[MySpecialActor].withDispatcher("custom-dispatcher"), "specialActor")
   val actor1: ActorRef = actorSystem.actorOf(Props[MyActor],name = "xyz")
   val actor2: ActorRef = actorSystem.actorOf(Props[MyActor],name = "MyActor")

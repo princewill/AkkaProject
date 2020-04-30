@@ -10,6 +10,7 @@ class Logger extends Actor {
     case MyControlMessage => println("Oh, I have to process Control message first")
     case x => println(x.toString)
   }
+
 }
 
 object ControlAwareMailbox extends App {

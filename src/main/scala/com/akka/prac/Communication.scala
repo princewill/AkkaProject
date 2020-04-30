@@ -39,7 +39,7 @@ object Messages {
 object Communication {
   import Messages._
 
-  val actorSystem = ActorSystem("communication")
+  val actorSystem: ActorSystem = ActorSystem("communication")
 
   val randNumGenActor: ActorRef = actorSystem.actorOf(Props[RandomNumberGeneratorActor], name = "RandomNumberGeneratorActor")
 
